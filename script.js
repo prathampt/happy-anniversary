@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
         startSlideshow();
 
         const audio = document.getElementById("background-music");
+        audio.muted = false;
         audio.play().catch(error => {
             console.log("Autoplay failed:", error);
         });
