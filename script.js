@@ -1,20 +1,23 @@
-document.addEventListener("DOMContentLoaded", function () {
-
-    const userConsent = confirm("Would you like to play the music and start the animation?");
-    
-    if (userConsent) {
+window.addEventListener("load", () => {
+    Swal.fire({
+      title: "Do you want to play music in the background?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
+      cancelButtonText: "No",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const audio = document.querySelector(".song");
+        audio.play().catch(error => console.error("Autoplay blocked:", error)); // Ensure it plays
         startSlideshow();
-
-        const audio = document.getElementById("background-music");
-        audio.muted = false;
-        audio.play().catch(error => {
-            console.log("Autoplay failed:", error);
-        });
-    } else {
-        alert("The animation will not start without permission.");
-        location.reload();
-    }
-});
+      } else {
+        startSlideshow();
+      }
+    });
+  });
+  
 
 function startSlideshow() {
     let slides = document.querySelectorAll(".slide");
